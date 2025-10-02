@@ -1,0 +1,17 @@
+[Unit]
+Description=safepath - Dashboard (Streamlit)
+After=network.target safepath-backend.service
+Requires=safepath-backend.service
+
+[Service]
+Type=simple
+User=safepath
+Group=safepath
+WorkingDirectory=/opt/safepath/dashboard
+EnvironmentFile=/etc/safepath/dashboard.env
+ExecStart=/opt/safepath/dashboard/venv/bin/streamlit run app.py --server.port 8501 --server.address 127.0.0.1
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
