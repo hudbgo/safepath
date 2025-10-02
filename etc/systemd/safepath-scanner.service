@@ -1,0 +1,16 @@
+[Unit]
+Description=safepath - Scanner (nmap single run)
+After=network.target safepath-backend.service
+Requires=safepath-backend.service
+
+[Service]
+Type=oneshot
+User=safepath
+Group=safepath
+WorkingDirectory=/opt/safepath/scanner
+EnvironmentFile=/etc/safepath/scanner.env
+ExecStart=/opt/safepath/scanner/venv/bin/python scanner.py
+TimeoutStartSec=600
+
+[Install]
+WantedBy=multi-user.target
