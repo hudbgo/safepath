@@ -1,0 +1,18 @@
+[Unit]
+Description=safepath - Backend (FastAPI + Uvicorn)
+After=network.target postgresql.service
+Requires=postgresql.service
+
+[Service]
+Type=simple
+User=safepath
+Group=safepath
+WorkingDirectory=/opt/safepath/backend
+EnvironmentFile=/etc/safepath/backend.env
+ExecStart=/opt/safepath/backend/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8000 --workers ${UVICORN_WORKERS:-1}
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
