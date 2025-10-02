@@ -1,0 +1,7 @@
+fastapi==0.95.2
+uvicorn[standard]==0.22.0
+sqlalchemy==1.4.48
+psycopg2-binary==2.9.7
+pydantic==1.10.9
+requests==2.31.0
+python-dotenv==1.0.0
